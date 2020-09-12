@@ -166,3 +166,26 @@ public User findByUsername(String username) {
 #### 2.引入sdk
 > 导入默认的工具文件
 > 填入自己申请到的accessKey,就可以调用了
+
++ 验证码是自己生成的随机数
++ 手机号前台获取
++ 验证码保存到session
+```java
+    // 签名
+    String signName = "MRYHL技术栈";
+    // 模版
+     String templateCode = "##########";
+    
+    // json模板参数
+    String param = "{\"code\":\"" + code + "\"}";
+    try {
+        SendSmsResponse sendSmsResponse = SmsUtils.sendSms(telephone, signName, templateCode, param);
+        if (sendSmsResponse.getCode().equalsIgnoreCase("ok")){
+            System.out.println(code);
+            return new ResultInfo(true,"发送成功");
+        }
+    } catch (ClientException e) {
+        e.printStackTrace();
+    }
+    return  new ResultInfo(false,"服务器忙...");
+```

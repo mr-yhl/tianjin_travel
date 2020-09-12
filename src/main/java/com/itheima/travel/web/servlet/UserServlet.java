@@ -33,6 +33,23 @@ public class UserServlet extends BaseServlet {
     protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1.接收请求参数
         String telephone = request.getParameter("telephone");
+        if (telephone==null){
+            request.setAttribute("message", "手机号码不能为空");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+        String username = request.getParameter("username");
+        if (username==null){
+            request.setAttribute("message", "用户名不能为空");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+        String password = request.getParameter("password");
+        if (password==null){
+            request.setAttribute("message", "密码不能为空");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
         String smsCode = request.getParameter("smsCode");
         // 2.获取session中验证码
         HttpSession session = request.getSession();
@@ -83,19 +100,21 @@ public class UserServlet extends BaseServlet {
     protected void ajaxCheackUsername(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 接收请求参数
         String username = request.getParameter("username");
-        // 调用service查询
-        User user = userService.findByUsername(username);
-
+        // System.out.println(username);
         // 判断结果
         ResultInfo resultInfo = null;
-        // 已存在的情况
-        if (user!=null){
-
-            resultInfo = new ResultInfo(false,"用户名已存在");
+        if (username.equalsIgnoreCase("")){
+            resultInfo = new ResultInfo(false,"用户名不能为空");
         }else {
-            // 不存在的情况
-            resultInfo = new ResultInfo(true,"√");
-
+            // 调用service查询
+            User user = userService.findByUsername(username);
+            // 已存在的情况
+            if (user!=null){
+                resultInfo = new ResultInfo(false,"用户名已存在");
+            }else {
+                // 不存在的情况
+                resultInfo = new ResultInfo(true,"√");
+            }
         }
         // 将结果转为json new ObjectMapper.writeValueAsString
         ObjectMapper objectMapper = new ObjectMapper();
@@ -151,6 +170,7 @@ public class UserServlet extends BaseServlet {
      * @throws IOException
      */
     protected void ajaxSendSms(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json;charset=utf-8");
         // 接收参数
         String telephone = request.getParameter("telephone");
 
@@ -167,7 +187,7 @@ public class UserServlet extends BaseServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         String s = objectMapper.writeValueAsString(resultInfo);
         //响应到客户端
-        response.setContentType("application/json;charset=utf-8");
+
         response.getWriter().write(s);
     }
     /*
