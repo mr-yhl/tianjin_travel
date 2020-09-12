@@ -47,6 +47,7 @@
 
                                     $("#userInfo").css("color","red").html(resp.message);
 
+
                                 }
 
                             });
@@ -67,8 +68,7 @@
                                 // 获取属性值
                                 let telephone = this.value;
                                 // 通过ajax发送请求使用get函数
-                                let reg = /^1[3456789]\d{9}$/;
-                                if (reg.test(telephone)) {
+
                                         // 校验通过
                                         let url = '${pageContext.request.contextPath}/UserServlet';
                                         let data = 'action=ajaxCheackTelephone&telephone='+telephone;
@@ -77,16 +77,16 @@
                                             //alert(resp.message)
                                             if (resp.success){
                                                 $("#telInfo").css("color","green").html(resp.message);
+                                                $("#sendSmsCode").prop("disabled",false);
                                             }else {
 
                                                 $("#telInfo").css("color","red").html(resp.message);
+                                                $("#sendSmsCode").prop("disabled",true);
 
                                             }
 
                                         });
-                                }else {
-                                    alert("手机号不合法");
-                                }
+
 
 
                             });
@@ -112,15 +112,19 @@
                                 $("#sendSmsCode").click(function () {
                                     let telephone = $("#telephone").val();
 
-                                    let url = '${pageContext.request.contextPath}/UserServlet';
-                                    let data = 'action=ajaxSendSms&telephone='+telephone;
-                                    $.get(url,data,function (resp) {
-                                        // 处理结果
-                                        alert(resp.message);
+                                    let reg = /^1[3456789]\d{9}$/;
+                                    if (reg.test(telephone)) {
+                                        let url = '${pageContext.request.contextPath}/UserServlet';
+                                        let data = 'action=ajaxSendSms&telephone='+telephone;
+                                        $.get(url,data,function (resp) {
+                                            // 处理结果
+                                            alert(resp.message);
 
-                                    })
-                                    countDown(this);
-
+                                        })
+                                        countDown(this);
+                                }else {
+                                    alert("手机号不合法");
+                                }
                                 });
                             </script>
                         </td>

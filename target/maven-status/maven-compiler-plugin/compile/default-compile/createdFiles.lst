@@ -8,6 +8,7 @@ com\itheima\travel\domain\Seller.class
 com\itheima\travel\domain\ResultInfo.class
 com\itheima\travel\dao\UserDao.class
 com\itheima\travel\domain\RouteImg.class
+com\itheima\travel\util\SmsUtils.class
 com\itheima\travel\web\filter\EncodeFilter.class
 com\itheima\travel\domain\OrderItem.class
 com\itheima\travel\domain\Route.class

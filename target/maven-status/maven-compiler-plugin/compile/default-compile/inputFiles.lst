@@ -10,6 +10,7 @@ F:\code\tianjin_travel\src\main\java\com\itheima\travel\domain\ResultInfo.java
 F:\code\tianjin_travel\src\main\java\com\itheima\travel\web\servlet\UserServlet.java
 F:\code\tianjin_travel\src\main\java\com\itheima\travel\domain\RouteImg.java
 F:\code\tianjin_travel\src\main\java\com\itheima\travel\util\MyBatisUtils.java
+F:\code\tianjin_travel\src\main\java\com\itheima\travel\util\SmsUtils.java
 F:\code\tianjin_travel\src\main\java\com\itheima\travel\domain\Route.java
 F:\code\tianjin_travel\src\main\java\com\itheima\travel\domain\User.java
 F:\code\tianjin_travel\src\main\java\com\itheima\travel\dao\UserDao.java

@@ -107,6 +107,14 @@ public class UserServlet extends BaseServlet {
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(s);
     }
+
+    /**
+     * 手机号验证
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void ajaxCheackTelephone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 接收请求参数
         String telephone = request.getParameter("telephone");
@@ -145,6 +153,8 @@ public class UserServlet extends BaseServlet {
     protected void ajaxSendSms(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 接收参数
         String telephone = request.getParameter("telephone");
+
+
         // 生成六位随机数
         String code = RandomUtil.randomNumbers(6);
         // 调用service发送短信

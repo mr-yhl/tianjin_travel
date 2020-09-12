@@ -1,4 +1,4 @@
-let countNum = 10;
+let countNum = 60;
 function countDown(obj) {
     countNum--;
     if (countNum == 0) {// 倒计时结束

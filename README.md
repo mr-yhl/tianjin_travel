@@ -84,3 +84,85 @@ void save(User user);
 
 ## 第二天 注册页文本校验短信验证码等
 ### 校验用户名
+> 通过ajax技术实现对用户名的校验。通过对此功能的简单修改,实现了输入用户名后,焦点离开文本框后立即给出结果判断此用户名是否已被注册过.
+
+> 页面部分
+
+```js
+// 绑定事件
+$("#username").blur(function() {
+// 获取属性值
+let username = this.value;
+// 通过ajax发送请求使用get函数
+let url = '${pageContext.request.contextPath}/UserServlet';
+let data = 'action=ajaxCheackUsername&username='+username;
+$.get(url,data,function (resp) {
+        // 处理结果
+        //alert(resp.message)
+        if (resp.success){
+            $("#userInfo").css("color","green").html(resp.message);
+        }else {    
+            $("#userInfo").css("color","red").html(resp.message);    
+        }
+    });
+});
+```
+
+[注册页面](./src/main/webapp/register.jsp)
+
+> servlet部分 
+
+```java
+protected void ajaxCheackUsername(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // 接收请求参数
+    String username = request.getParameter("username");
+    // 调用service查询
+    User user = userService.findByUsername(username);
+
+    // 判断结果
+    ResultInfo resultInfo = null;
+    // 已存在的情况
+    if (user!=null){
+
+        resultInfo = new ResultInfo(false,"用户名已存在");
+    }else {
+        // 不存在的情况
+        resultInfo = new ResultInfo(true,"√");
+
+    }
+    // 将结果转为json new ObjectMapper.writeValueAsString
+    ObjectMapper objectMapper = new ObjectMapper();
+    String s = objectMapper.writeValueAsString(resultInfo);
+
+
+    // 响应到客户端
+    // 声明格式
+    response.setContentType("application/json;charset=utf-8");
+    response.getWriter().write(s);
+}
+```
+
+[UserServlet](./src/main/java/com/itheima/travel/web/servlet/UserServlet.java)
+
+> service部分
+
+```java
+@Override
+public User findByUsername(String username) {
+    SqlSession sqlSession = MyBatisUtils.openSession();
+    UserDao mapper = sqlSession.getMapper(UserDao.class);
+    User byUsername = mapper.findByUsername(username);
+    MyBatisUtils.release(sqlSession);
+    return byUsername;
+}
+```
+
+[接口](./src/main/java/com/itheima/travel/service/UserService.java) | [实现类](./src/main/java/com/itheima/travel/service/impl/UserServiceImpl.java)
+
+### 阿里云短信服务调用
+#### 1.申请账号,选择服务
+> 申请签名是最难的一部分,如果申请不到请耐心反复申请,请坚持下来,一定不要放弃希望,相信奇迹一定会出现的.
+
+#### 2.引入sdk
+> 导入默认的工具文件
+> 填入自己申请到的accessKey,就可以调用了
