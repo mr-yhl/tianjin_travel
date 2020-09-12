@@ -6,7 +6,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/getParameter.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/countdown.js"></script>
 <!-- 头部 start -->
 <header id="header">
     <%--广告--%>

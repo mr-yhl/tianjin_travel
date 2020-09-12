@@ -82,3 +82,5 @@ void save(User user);
 
 [接口](./src/main/java/com/itheima/travel/dao/UserDao.java) | [映射文件](./src/main/resources/com/itheima/travel/dao/UserDao.xml)
 
+## 第二天 注册页文本校验短信验证码等
+### 校验用户名

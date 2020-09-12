@@ -37,4 +37,33 @@ public class UserServiceImpl implements UserService {
         MyBatisUtils.release(sqlSession);
         return new ResultInfo(true);
     }
+
+    /**
+     * 判断用户名
+     * @param username
+     * @return
+     */
+    @Override
+    public User findByUsername(String username) {
+        SqlSession sqlSession = MyBatisUtils.openSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        User byUsername = mapper.findByUsername(username);
+        MyBatisUtils.release(sqlSession);
+        return byUsername;
+    }
+
+    @Override
+    public User findByTelephone(String telephone) {
+        SqlSession sqlSession = MyBatisUtils.openSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        User byTelephone = mapper.findByTelephone(telephone);
+        MyBatisUtils.release(sqlSession);
+        return byTelephone;
+    }
+
+    @Override
+    public ResultInfo sendSms(String telephone, String code) {
+        System.out.println("验证码是"+code);
+        return new ResultInfo(true,"发送成功");
+    }
 }

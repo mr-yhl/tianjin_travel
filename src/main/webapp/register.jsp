@@ -30,6 +30,28 @@
                             <input type="text" id="username" name="username" placeholder="请输入账号">
 							<span id="userInfo" style="font-size:10px"></span>
                         </td>
+                        <script>
+                            // 绑定事件
+                            $("#username").blur(function() {
+                            // 获取属性值
+                            let username = this.value;
+                            // 通过ajax发送请求使用get函数
+                            let url = '${pageContext.request.contextPath}/UserServlet';
+                            let data = 'action=ajaxCheackUsername&username='+username;
+                            $.get(url,data,function (resp) {
+                                // 处理结果
+                                //alert(resp.message)
+                                if (resp.success){
+                                    $("#userInfo").css("color","green").html(resp.message);
+                                }else {
+
+                                    $("#userInfo").css("color","red").html(resp.message);
+
+                                }
+
+                            });
+                            });
+                        </script>
                     </tr>
                     <tr>
                         <td class="td_left">
@@ -37,7 +59,38 @@
                         </td>
                         <td class="td_right">
                             <input type="text" id="telephone" name="telephone" placeholder="请输入您的手机号">
+                            <span id="telInfo" style="font-size:10px"></span>
                         </td>
+                        <script>
+                            // 绑定事件
+                            $("#telephone").blur(function() {
+                                // 获取属性值
+                                let telephone = this.value;
+                                // 通过ajax发送请求使用get函数
+                                let reg = /^1[3456789]\d{9}$/;
+                                if (reg.test(telephone)) {
+                                        // 校验通过
+                                        let url = '${pageContext.request.contextPath}/UserServlet';
+                                        let data = 'action=ajaxCheackTelephone&telephone='+telephone;
+                                        $.get(url,data,function (resp) {
+                                            // 处理结果
+                                            //alert(resp.message)
+                                            if (resp.success){
+                                                $("#telInfo").css("color","green").html(resp.message);
+                                            }else {
+
+                                                $("#telInfo").css("color","red").html(resp.message);
+
+                                            }
+
+                                        });
+                                }else {
+                                    alert("手机号不合法");
+                                }
+
+
+                            });
+                        </script>
                     </tr>
                     <tr>
                         <td class="td_left">
@@ -55,6 +108,21 @@
                             <input type="text" id="smsCode" name="smsCode" class="check" placeholder="请输入验证码">
                           
                             <input id="sendSmsCode" value="发送手机验证码" class="btn btn-link"/>
+                            <script>
+                                $("#sendSmsCode").click(function () {
+                                    let telephone = $("#telephone").val();
+
+                                    let url = '${pageContext.request.contextPath}/UserServlet';
+                                    let data = 'action=ajaxSendSms&telephone='+telephone;
+                                    $.get(url,data,function (resp) {
+                                        // 处理结果
+                                        alert(resp.message);
+
+                                    })
+                                    countDown(this);
+
+                                });
+                            </script>
                         </td>
                     </tr>
                     <tr>
