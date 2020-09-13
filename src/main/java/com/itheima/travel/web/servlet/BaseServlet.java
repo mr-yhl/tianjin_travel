@@ -1,5 +1,7 @@
 package com.itheima.travel.web.servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,14 +24,27 @@ public class BaseServlet extends HttpServlet {
             // 根据action获取方法
             Method declaredMethod = clazz.getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
             // 执行对象
-            declaredMethod.invoke(this,req,resp);
+            declaredMethod.invoke(this, req, resp);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             throw new RuntimeException("没有找到对应的方法");
-        }catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
             throw new RuntimeException("服务器忙...");
         }
 
+    }
+
+    /**
+     * 将对象转为json响应到客户端
+      */
+    public void java2JsonWriteClient(Object data, HttpServletResponse response) throws
+            ServletException, IOException {
+        // 将任意对象转为json
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(data);
+        // 响应到客户端
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(json);
     }
 }

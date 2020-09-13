@@ -1,0 +1,4 @@
+<beans>
+    <bean id="userService" class="com.itheima.travel.service.impl.UserServiceImpl"></bean>
+    <bean id="addressService" class="com.itheima.travel.service.impl.AddressServiceImpl"></bean>
+</beans>

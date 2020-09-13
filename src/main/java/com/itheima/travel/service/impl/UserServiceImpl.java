@@ -84,4 +84,44 @@ public class UserServiceImpl implements UserService {
         System.out.println("验证码是"+code);
         return new ResultInfo(true,"发送成功");
     }
+
+    @Override
+    public ResultInfo loginPwd(String username, String password) {
+        SqlSession sqlSession = MyBatisUtils.openSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        // 查看用户名是否存在
+        User currentUser = mapper.findByUsername(username);
+        if (currentUser==null){
+            MyBatisUtils.release(sqlSession);
+            return new ResultInfo(false,"此用户名不存在呀");
+        }
+
+        // 对密码进行加密
+        String s = SecureUtil.md5(password);
+        if (! s.equals(currentUser.getPassword())){
+            MyBatisUtils.release(sqlSession);
+            return new ResultInfo(false,"抱歉,你应该记错密码了!!");
+        }
+
+        MyBatisUtils.release(sqlSession);
+
+        return new ResultInfo(true,"恭喜你登陆成功",currentUser);
+    }
+
+    @Override
+    public void updateInfo(User user) {
+        SqlSession sqlSession = MyBatisUtils.openSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        mapper.updateInfo(user);
+        MyBatisUtils.release(sqlSession);
+    }
+
+    @Override
+    public User findByUid(int uid) {
+        SqlSession sqlSession = MyBatisUtils.openSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        User user = mapper.findByUid(uid);
+        MyBatisUtils.release(sqlSession);
+        return user;
+    }
 }

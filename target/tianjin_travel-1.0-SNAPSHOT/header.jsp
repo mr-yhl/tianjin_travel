@@ -15,18 +15,22 @@
     </div>
     <%--右侧按钮--%>
     <div class="shortcut">
-        <!-- 未登录状态 -->
-		<div class="login_out">
-			<a id="loginBtn" data-toggle="modal" data-target="#loginModel" style="cursor: pointer;">登录</a>
-			<a href="register.jsp" style="cursor: pointer;">注册</a>
-		</div>
+        <c:if test="${empty currentUser}">
+            <!-- 未登录状态 -->
+            <div class="login_out">
+                <a id="loginBtn" data-toggle="modal" data-target="#loginModel" style="cursor: pointer;">登录</a>
+                <a href="register.jsp" style="cursor: pointer;">注册</a>
+            </div>
+        </c:if>
         <!-- 登录状态 -->
-		<div class="login">
-			<span>欢迎回来，${currentUser.username}</span>
-			<a href="home_index.jsp" class="collection">个人中心</a>
-			<a href="cart.jsp" class="collection">购物车</a>
-			<a href="index.jsp">退出</a>
-		</div>
+        <c:if test="${not empty currentUser}">
+            <div class="login">
+                <span>欢迎回来，${currentUser.username}</span>
+                <a href="home_index.jsp" class="collection">个人中心</a>
+                <a href="cart.jsp" class="collection">购物车</a>
+                <a href="${pageContext.request.contextPath}/UserServlet?action=logout">退出</a>
+            </div>
+        </c:if>
     </div>
     <%--搜索框--%>
     <div class="header_wrap">
@@ -93,7 +97,7 @@
                 <%--密码登录--%>
                 <div class="tab-pane fade in active" id="pwdReg">
                     <form id="pwdLoginForm" action="#" method="post">
-                        <input type="hidden" name="action" value="pwdLogin">
+                        <input type="hidden" name="action" value="ajaxLoginPwd">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>用户名</label>
@@ -107,11 +111,30 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-							<span id="pwdLoginSpan" style="color:red"></span>
+                            <span id="pwdLoginSpan" style="color:red"></span>
                             <input type="reset" class="btn btn-primary" value="重置">
                             <input type="button" id="pwdLogin" class="btn btn-primary" value="登录"/>
                         </div>
                     </form>
+                    <script>
+                        // 绑定事件
+                        $("#pwdLogin").click(function () {
+                            // 获取值serialize()方法获取值和请求地址
+                            let param = $("#pwdLoginForm").serialize();
+                            // url
+                            let url = '${pageContext.request.contextPath}/UserServlet';
+                            // $.post
+                            $.post(url, param, function (response) {
+                                // 结果判断
+                                if (response.success) {
+                                    location.reload();
+                                } else {
+                                    $("#pwdLoginSpan").text(response.message);
+                                }
+                            });
+                        });
+
+                    </script>
                 </div>
                 <%--短信登录--%>
                 <div class="tab-pane fade" id="telReg">
@@ -128,12 +151,39 @@
                                 <input type="text" class="form-control" id="login_check" name="smsCode"
                                        placeholder="请输入手机验证码">
                             </div>
-                            <a href="javaScript:void(0)" id="login_sendSmsCode">发送手机验证码</a>
+                            <%--<a href="javaScript:void(0)" id="login_sendSmsCode">发送手机验证码</a>--%>
+                            <input id="login_sendSmsCode" value="发送手机验证码" class="btn btn-link"/>
+                            <script>
+                                $("#login_sendSmsCode").click(function () {
+                                    let telephone = $("#login_telephone").val();
+                                    let url = '${pageContext.request.contextPath}/UserServlet';
+                                    let data = 'action=ajaxSendSms&telephone=' + telephone;
+                                    $.get(url, data, function (resp) {
+                                        // 处理结果
+                                        alert(resp.message);
+                                    })
+                                    countDown(this);
+                                });
+                            </script>
                         </div>
                         <div class="modal-footer">
-							<span id="telLoginSpan" style="color:red"></span>
+                            <span id="telLoginSpan" style="color:red"></span>
                             <input type="reset" class="btn btn-primary" value="重置">
                             <input type="button" class="btn btn-primary" id="telLogin" value="登录"/>
+                            <script>
+                                $("#telLogin").click(function () {
+                                    let param = $("#telLoginForm").serialize();
+                                    let  url = "${pageContext.request.contextPath}/UserServlet";
+                                    $.post(url,param,function (response) {
+                                        if (response.success){
+                                            location.reload();
+                                        }else {
+                                            $("#telLoginSpan").text(response.message)
+                                        }
+
+                                    });
+                                });
+                            </script>
                         </div>
                     </form>
                 </div>

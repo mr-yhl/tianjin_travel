@@ -4,7 +4,7 @@ function countDown(obj) {
     if (countNum == 0) {// 倒计时结束
         $(obj).prop('disabled', false); // 按钮可用
         $(obj).val("重新发送短信");
-        countNum = 10;
+        countNum = 60;
     } else {// 倒计时继续
         $(obj).prop('disabled', true); // 按钮不可用
         $(obj).val(countNum + "秒后可发送短信");

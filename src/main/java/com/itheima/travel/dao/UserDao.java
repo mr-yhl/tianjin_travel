@@ -25,4 +25,19 @@ public interface UserDao {
      * @param user
      */
     void save(User user);
+
+    /**
+     * 更新
+     * @param user
+     */
+
+    void updateInfo(User user);
+
+    /**
+     * 根据uid查找
+     * @param uid
+     * @return
+     */
+    @Select("select * from tab_user where uid = #{uid}")
+    User findByUid(int uid);
 }

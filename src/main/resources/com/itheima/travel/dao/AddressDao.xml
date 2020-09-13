@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--引入约束文件,DTD约束头-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--根标签  命名空间,与下面语句的id一起组成查询的标识-->
+<mapper namespace="com.itheima.travel.dao.AddressDao">
+    <insert id="save">
+        INSERT INTO tab_address VALUES(NULL,#{user.uid},#{contact},#{address},#{telephone},#{isdefault})
+    </insert>
+
+    <select id="findByUid" resultType="com.itheima.travel.domain.Address">
+        select * from tab_address where uid = #{uid}
+    </select>
+</mapper>

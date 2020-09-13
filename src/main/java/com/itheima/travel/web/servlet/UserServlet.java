@@ -1,26 +1,30 @@
 package com.itheima.travel.web.servlet;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itheima.travel.domain.ResultInfo;
 import com.itheima.travel.domain.User;
 import com.itheima.travel.service.UserService;
-import com.itheima.travel.service.impl.UserServiceImpl;
+import com.itheima.travel.util.BeanFactory;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/UserServlet")
+@MultipartConfig // 支持文件上传解析
 public class UserServlet extends BaseServlet {
 
     // 全局变量调用UserServiceImpl
-    UserService userService = new UserServiceImpl();
+
+    UserService userService = (UserService) BeanFactory.getBean("userService");
 
 
     /**
@@ -117,14 +121,7 @@ public class UserServlet extends BaseServlet {
             }
         }
         // 将结果转为json new ObjectMapper.writeValueAsString
-        ObjectMapper objectMapper = new ObjectMapper();
-        String s = objectMapper.writeValueAsString(resultInfo);
-
-
-        // 响应到客户端
-        // 声明格式
-        response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write(s);
+        java2JsonWriteClient(resultInfo,response);
     }
 
     /**
@@ -152,14 +149,7 @@ public class UserServlet extends BaseServlet {
 
         }
         // 将结果转为json new ObjectMapper.writeValueAsString
-        ObjectMapper objectMapper = new ObjectMapper();
-        String s = objectMapper.writeValueAsString(resultInfo);
-
-
-        // 响应到客户端
-        // 声明格式
-        response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write(s);
+        java2JsonWriteClient(resultInfo,response);
     }
 
     /**
@@ -170,7 +160,7 @@ public class UserServlet extends BaseServlet {
      * @throws IOException
      */
     protected void ajaxSendSms(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json;charset=utf-8");
+
         // 接收参数
         String telephone = request.getParameter("telephone");
 
@@ -183,16 +173,141 @@ public class UserServlet extends BaseServlet {
         if (resultInfo.getSuccess()){
             request.getSession().setAttribute("session_code_"+telephone,code);
         }
-        // 转json
-        ObjectMapper objectMapper = new ObjectMapper();
-        String s = objectMapper.writeValueAsString(resultInfo);
-        //响应到客户端
+        java2JsonWriteClient(resultInfo,response);
 
-        response.getWriter().write(s);
+    }
+
+    /**
+     * 密码登陆
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void ajaxLoginPwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 接收参数2个
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        // 调用service
+        ResultInfo resultInfo = userService.loginPwd(username,password);
+        // 登陆成功,写入session
+        if (resultInfo.getSuccess()) {
+            request.getSession().setAttribute("currentUser", resultInfo.getData());
+        }
+
+
+        // 清除user信息(setDate null)
+        resultInfo.setData(null);
+        // 转json,响应到浏览器
+        java2JsonWriteClient(resultInfo,response);
+
+
+    }
+
+    /**
+     * 退出登录状态
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 清除用户信息
+        request.getSession().removeAttribute("currentUser");
+        // 重定向到前台
+        response.sendRedirect(request.getContextPath()+"/index.jsp");
     }
     /*
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
     */
+
+    /**
+     * 修改个人信息
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void updateInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // String uid = request.getParameter("uid");
+        // System.out.println(uid);
+        // 获取请求参数
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        // 创建实体对象
+        User user = new User();
+        // 封装实体对象
+        try {
+            BeanUtils.populate(user,parameterMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("实体封装失败");
+        }
+
+        // 头像上传---------------------------------------------------开始
+        // 获取文件对象
+        Part picPart = request.getPart("pic");
+        // 获取文件名
+        String fileName = picPart.getSubmittedFileName();
+        // 判断存在
+        if ((fileName.length()>0)) {
+            // 用户提交头像
+            // 生成随机文件名
+            fileName = IdUtil.simpleUUID()+fileName;
+            String realPath = request.getServletContext().getRealPath("/pic/" + fileName);
+            picPart.write(realPath);
+            // 写入实体
+            user.setPic("pic/"+fileName);
+        }
+
+
+        // 头像上传---------------------------------------------------结束
+
+
+
+        userService.updateInfo(user);
+        // 查询结果
+        User currentUser = userService.findByUid(user.getUid());
+
+        request.getSession().setAttribute("currentUser",currentUser);
+
+        // 重定向到页面
+        response.sendRedirect(request.getContextPath()+"/home_index.jsp");
+
+    }
+
+
+    /**
+     * 短信登录
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void telLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 接收请求参数
+        String telephone = request.getParameter("telephone");
+        String smsCode = request.getParameter("smsCode");
+        // 根据手机号查询
+        User byTelephone = userService.findByTelephone(telephone);
+        ResultInfo resultInfo =null;
+        if (byTelephone == null){
+            resultInfo= new ResultInfo(false,"手机号不存在");
+
+        }else{
+            String attribute =(String) request.getSession().getAttribute("session_code_" + telephone);
+            if (!attribute.equals(smsCode)){
+                resultInfo = new ResultInfo(false,"验证码错误");
+            }else {
+                request.getSession().setAttribute("currentUser",byTelephone);
+                resultInfo = new ResultInfo(true);
+            }
+        }
+        java2JsonWriteClient(resultInfo,response);
+    }
+
+
+
 }

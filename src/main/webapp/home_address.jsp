@@ -39,26 +39,19 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>刘田田</td>
-                                    <td>北京 北京市 海淀区 上地街道东北旺西路8号中关村软件园9号楼</td>
-                                    <td>12345678901</td>
-                                    <td>
-                                        <a href="#">编辑</a>
-                                        <a href="#">删除</a>
-                                        <a href="#">设为默认</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>沈沉</td>
-                                    <td>北京 北京市 海淀区 上地街道东北旺西路8号中关村软件园9号楼</td>
-                                    <td>12345678901</td>
-                                    <td>
-                                        <a href="#">编辑</a>
-                                        <a href="#">删除</a>
-                                        <a href="#">设为默认</a>
-                                    </td>
-                                </tr>
+                                <c:forEach items="${list}" var="address">
+                                    <tr>
+                                        <%--在这有个妈卖批要讲,这个变量因为单词写错了,卡了我半小时的时间--%>
+                                        <td>${address.contact}</td>
+                                        <td>${address.address}</td>
+                                        <td>${address.telephone}</td>
+                                        <td>
+                                            <a href="#">编辑</a>
+                                            <a href="#">删除</a>
+                                            <a href="#">设为默认</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -69,8 +62,8 @@
                                 <div class="modal-content">
                                     <%-- 新增地址--%>
                                     <div class="tab-pane fade in active" >
-                                        <form id="xxxx" action="#" method="post">
-                                            <input type="hidden" name="action" value="xxx">
+                                        <form id="xxxx" action="${pageContext.request.contextPath}/AddressServlet" method="post">
+                                            <input type="hidden" name="action" value="save">
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label>姓名</label>
@@ -90,7 +83,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <input type="button" class="btn btn-default" data-dismiss="modal"  value="关闭">
-                                                <input type="button" class="btn btn-primary" value="保存"/>
+                                                <input type="submit" class="btn btn-primary" value="保存"/>
                                             </div>
                                         </form>
                                     </div>

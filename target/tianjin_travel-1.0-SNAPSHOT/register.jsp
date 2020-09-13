@@ -113,8 +113,6 @@
                                     <script>
                                         $("#sendSmsCode").click(function () {
                                             let telephone = $("#telephone").val();
-
-
                                             let url = '${pageContext.request.contextPath}/UserServlet';
                                             let data = 'action=ajaxSendSms&telephone=' + telephone;
                                             $.get(url, data, function (resp) {

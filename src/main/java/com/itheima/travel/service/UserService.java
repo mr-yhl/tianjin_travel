@@ -26,6 +26,26 @@ public interface UserService {
      * @param code
      * @return
      */
-
     ResultInfo sendSms(String telephone, String code);
+
+    /**
+     * 验证登陆,用户密码方式
+     * @param username
+     * @param password
+     * @return
+     */
+    ResultInfo loginPwd(String username, String password);
+
+    /**
+     * 更新用户信息
+     * @param user
+     */
+    void updateInfo(User user);
+
+    /**
+     * 根据id找用户
+     * @param uid
+     * @return
+     */
+    User findByUid(int uid);
 }

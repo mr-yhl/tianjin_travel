@@ -28,9 +28,9 @@
                             <li class="active"><a href="#one" data-toggle="tab">基本资料</a></li>
                             <li><a href="#two" data-toggle="tab">头像照片</a></li>
                         </ul>
-                        <form action="${pageContext.request.contextPath}/UserServlet" method="post" enctype="application/x-www-form-urlencoded">
+                        <form action="${pageContext.request.contextPath}/UserServlet" method="post" enctype="multipart/form-data">
 							<%--回显id到隐藏域--%>
-                            <input type="hidden" name="uid" value="">
+                            <input type="hidden" name="uid" value="${currentUser.uid}">
                             <%--方法隐藏域--%>
                             <input type="hidden" name="action" value="updateInfo">
                             <div class="tab-content ">
@@ -39,28 +39,28 @@
                                         <div class="control-group">
                                             <label for="inputName" class="control-label">昵称：</label>
                                             <div class="controls">
-                                                <input type="text" id="inputName" name="nickname" placeholder="昵称">
+                                                <input type="text" id="inputName" name="nickname" placeholder="昵称" value="${currentUser.nickname}">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">性别：</label>
                                             <div class="controls">
 
-                                                <input type="radio" name="sex" value="1" checked="checked"><b>男</b>
+                                                <input type="radio" name="sex" value="1" <c:if test="${currentUser.sex == 1}"> checked="checked"</c:if>><b>男</b>
                                                 &nbsp;&nbsp;
-                                                <input type="radio" name="sex" value="0"><b>女</b>
+                                                <input type="radio" name="sex" value="0" <c:if test="${currentUser.sex == 0}"> checked="checked"</c:if>><b>女</b>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">生日：</label>
                                             <div class="controls">
-                                                <input type="text" name="birthday" placeholder="生日">
+                                                <input type="text" name="birthday" placeholder="生日" value="${currentUser.birthday}">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">邮箱：</label>
                                             <div class="controls">
-                                                <input type="text" name="email" placeholder="邮箱">
+                                                <input type="text" name="email" placeholder="邮箱" value="${currentUser.email}">
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -77,7 +77,7 @@
                                         <p>当前头像：</p>
                                         <div class="upload">
                                             <img id="imgShow_WU_FILE_0" width="100" height="100"
-                                                 src="${pageContext.request.contextPath}/img/_/photo_icon.png"
+                                                 src="${pageContext.request.contextPath}/${currentUser.pic}"
                                                  alt="">
                                             <input type="file" id="up_img_WU_FILE_0" name="pic"/>
                                         </div>

@@ -189,3 +189,21 @@ public User findByUsername(String username) {
     }
     return  new ResultInfo(false,"服务器忙...");
 ```
+
+## 第三天 登陆与地址管理
+### 1.登陆模块
+#### 1.1 账号密码登陆
+![需求分析](./readimg/day03.1.1.png)
+
+#### 1.2 验证码登陆
+![需求分析](./readimg/day03.1.2.png)
+
+### 2.个人信息修改
+![需求分析](./readimg/day03.2.png)
+
+### 3.地址管理
+![需求分析](./readimg/day03.3.png)
+
+
+
+
