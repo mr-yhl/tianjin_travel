@@ -6,6 +6,31 @@
     <insert id="save">
         INSERT INTO tab_address VALUES(NULL,#{user.uid},#{contact},#{address},#{telephone},#{isdefault})
     </insert>
+    <update id="updateByAid">
+        UPDATE tab_address
+        <set>
+            <if test="contact !=null and contact !=''">
+                contact = #{contact},
+            </if>
+            <if test="address !=null and address !=''">
+                address = #{address},
+            </if>
+            <if test="telephone !=null and telephone !=''">
+                telephone = #{telephone},
+            </if>
+        </set>
+        WHERE
+        aid = #{aid}
+    </update>
+    <update id="setZero">
+        UPDATE tab_address SET isdefault = 0 WHERE uid = #{uid}
+    </update>
+    <update id="setOne">
+        UPDATE tab_address SET isdefault = 1 WHERE uid = #{uid} and aid = #{aid}
+    </update>
+    <delete id="deleAddress">
+        DELETE FROM tab_address WHERE aid = #{aid}
+    </delete>
 
     <select id="findByUid" resultType="com.itheima.travel.domain.Address">
         select * from tab_address where uid = #{uid}

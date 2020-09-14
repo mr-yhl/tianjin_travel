@@ -13,4 +13,12 @@ public interface AddressService {
     List<Address> findByUid(String uid);
 
     void save(Address address);
+
+    void updateByAid(Address address);
+
+    void deleAddress(String aid);
+
+    void setZero(int uid);
+
+    void setOne(int uid, String aid);
 }

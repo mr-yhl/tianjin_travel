@@ -69,6 +69,51 @@ public class AddressServlet extends BaseServlet {
     }
 
 
+    protected void updateByAid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String upcontact = request.getParameter("upcontact");
+        int aid = Integer.parseInt(request.getParameter("aid"));
+        String upaddress = request.getParameter("upaddress");
+        String uptelephone = request.getParameter("uptelephone");
+        Address address = new Address();
+        address.setAid(aid);
+        address.setContact(upcontact);
+        address.setAddress(upaddress);
+        address.setTelephone(uptelephone);
+        // 修改
+        addressService.updateByAid(address);
+
+        User  currentUser =(User) request.getSession().getAttribute("currentUser");
+        // 重定向
+        response.sendRedirect(request.getContextPath()+"/AddressServlet?action=findByUid&uid="+currentUser.getUid());
+
+
+    }
+
+
+    protected void deleAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String aid = request.getParameter("aid1");
+
+        addressService.deleAddress(aid);
+
+        User  currentUser =(User) request.getSession().getAttribute("currentUser");
+        // 重定向
+        response.sendRedirect(request.getContextPath()+"/AddressServlet?action=findByUid&uid="+currentUser.getUid());
+
+    }
+
+
+    protected void setupthis(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String aid = request.getParameter("aid");
+        User  currentUser =(User) request.getSession().getAttribute("currentUser");
+        int uid = currentUser.getUid();
+        addressService.setZero(uid);
+
+        addressService.setOne(uid,aid);
+
+        response.sendRedirect(request.getContextPath()+"/AddressServlet?action=findByUid&uid="+currentUser.getUid());
+
+    }
+
     protected void xxx(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

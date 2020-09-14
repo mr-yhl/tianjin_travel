@@ -11,6 +11,7 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
     /**
      * 根据uid查询
+     *
      * @param uid
      * @return
      */
@@ -40,5 +41,53 @@ public class AddressServiceImpl implements AddressService {
         MyBatisUtils.release(sqlSession);
 
 
+    }
+
+    @Override
+    public void updateByAid(Address address) {
+        // 创建代理对象
+        SqlSession sqlSession = MyBatisUtils.openSession();
+        AddressDao mapper = sqlSession.getMapper(AddressDao.class);
+
+        mapper.updateByAid(address);
+
+        // 释放资源
+        MyBatisUtils.release(sqlSession);
+    }
+
+    @Override
+    public void deleAddress(String aid) {
+        // 创建代理对象
+        SqlSession sqlSession = MyBatisUtils.openSession();
+        AddressDao mapper = sqlSession.getMapper(AddressDao.class);
+
+        mapper.deleAddress(aid);
+
+        // 释放资源
+        MyBatisUtils.release(sqlSession);
+    }
+
+    @Override
+    public void setZero(int uid) {
+        // 创建代理对象
+        SqlSession sqlSession = MyBatisUtils.openSession();
+        AddressDao mapper = sqlSession.getMapper(AddressDao.class);
+
+        mapper.setZero(uid);
+
+        // 释放资源
+        MyBatisUtils.release(sqlSession);
+    }
+
+    @Override
+    public void setOne(int uid, String aid) {
+        // 创建代理对象
+        SqlSession sqlSession = MyBatisUtils.openSession();
+        AddressDao mapper = sqlSession.getMapper(AddressDao.class);
+
+        mapper.setOne(uid,aid);
+
+        // 释放资源
+        MyBatisUtils.release(sqlSession);
     }
 }
