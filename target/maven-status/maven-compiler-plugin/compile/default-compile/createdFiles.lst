@@ -1,7 +1,10 @@
+com\itheima\travel\service\impl\CategoryServiceImpl.class
 com\itheima\travel\web\servlet\UserServlet.class
 com\itheima\travel\domain\Order.class
 com\itheima\travel\domain\ResultInfo.class
+com\itheima\travel\util\JedisUtils.class
 com\itheima\travel\util\SmsUtils.class
+com\itheima\travel\service\CategoryService.class
 com\itheima\travel\web\filter\EncodeFilter.class
 com\itheima\travel\domain\OrderItem.class
 com\itheima\travel\util\BeanFactory.class
@@ -18,6 +21,8 @@ com\itheima\travel\util\MyBatisUtils.class
 com\itheima\travel\domain\Address.class
 com\itheima\travel\domain\Category.class
 com\itheima\travel\domain\Seller.class
+com\itheima\travel\web\servlet\CategoryServlet.class
 com\itheima\travel\dao\UserDao.class
 com\itheima\travel\domain\RouteImg.class
 com\itheima\travel\service\impl\AddressServiceImpl.class
+com\itheima\travel\dao\CategoryDao.class

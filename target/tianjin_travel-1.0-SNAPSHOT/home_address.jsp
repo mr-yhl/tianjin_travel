@@ -44,7 +44,6 @@
 
                                     <tr>
                                         <%--在这有个妈卖批要讲,这个变量因为单词写错了,卡了我半小时的时间--%>
-
                                         <td>${address.contact}</td>
                                         <td>${address.address}</td>
                                         <td>${address.telephone}</td>

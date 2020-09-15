@@ -6,14 +6,15 @@ import com.itheima.travel.domain.ResultInfo;
 import com.itheima.travel.domain.User;
 import com.itheima.travel.service.UserService;
 import com.itheima.travel.util.BeanFactory;
+import com.itheima.travel.util.JedisUtils;
 import org.apache.commons.beanutils.BeanUtils;
+import redis.clients.jedis.Jedis;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.Map;
@@ -56,8 +57,10 @@ public class UserServlet extends BaseServlet {
         }
         String smsCode = request.getParameter("smsCode");
         // 2.获取session中验证码
-        HttpSession session = request.getSession();
-        String sessionCode = (String) session.getAttribute("session_code_" + telephone);
+        // HttpSession session = request.getSession();
+        // String sessionCode = (String) session.getAttribute("session_code_" + telephone);
+        Jedis jedis = JedisUtils.getJedis();
+        String sessionCode = jedis.get("sms_code_"+telephone);
         // 3.判断
         // 验证码为空或不一致拦截
         if (sessionCode == null || !sessionCode.equals(smsCode)) {
@@ -81,16 +84,17 @@ public class UserServlet extends BaseServlet {
 
         // 调用service
         ResultInfo resultInfo = userService.register(user);
-        // System.out.println(resultInfo);
+
 
         //转发视图
         if (resultInfo.getSuccess()){
             response.sendRedirect(request.getContextPath()+"/register_ok.jsp");
+            jedis.del("sms_code_"+telephone);
         }else {
             request.setAttribute("message",resultInfo.getMessage());
             request.getRequestDispatcher("register.jsp").forward(request,response);
         }
-
+        jedis.close();
 
     }
 
@@ -171,7 +175,10 @@ public class UserServlet extends BaseServlet {
         ResultInfo resultInfo = userService.sendSms(telephone,code);
         // 判断结果
         if (resultInfo.getSuccess()){
-            request.getSession().setAttribute("session_code_"+telephone,code);
+            //request.getSession().setAttribute("session_code_"+telephone,code);
+            Jedis jedis = JedisUtils.getJedis();
+            jedis.setex("sms_code_"+telephone,300,code);
+            jedis.close();
         }
         java2JsonWriteClient(resultInfo,response);
 
@@ -297,14 +304,20 @@ public class UserServlet extends BaseServlet {
             resultInfo= new ResultInfo(false,"手机号不存在");
 
         }else{
-            String attribute =(String) request.getSession().getAttribute("session_code_" + telephone);
+            //String attribute =(String) request.getSession().getAttribute("session_code_" + telephone);
+            Jedis jedis = JedisUtils.getJedis();
+            String attribute = jedis.get("sms_code_"+telephone);
             if (!attribute.equals(smsCode)){
                 resultInfo = new ResultInfo(false,"验证码错误");
+                jedis.del("sms_code_"+telephone);
+
             }else {
                 request.getSession().setAttribute("currentUser",byTelephone);
                 resultInfo = new ResultInfo(true);
             }
+            jedis.close();
         }
+
         java2JsonWriteClient(resultInfo,response);
     }
 

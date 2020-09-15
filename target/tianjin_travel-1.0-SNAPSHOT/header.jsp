@@ -60,16 +60,21 @@
 <div class="navitem">
     <ul class="nav" id="categoryUI">
         <li class="nav-active"><a href="index.jsp">首页</a></li>
-        <li><a href="route_list.jsp">门票</a></li>
-        <li><a href="route_list.jsp">酒店</a></li>
-        <li><a href="route_list.jsp">香港车票</a></li>
-        <li><a href="route_list.jsp">出境游</a></li>
-        <li><a href="route_list.jsp">国内游</a></li>
-        <li><a href="route_list.jsp">港澳游</a></li>
-        <li><a href="route_list.jsp">抱团定制</a></li>
-        <li><a href="route_list.jsp">全球自由行</a></li>
-        <li><a href="favoriterank.jsp">收藏排行榜</a></li>
+
     </ul>
+    <script>
+        // 绑定页面加载事件
+        $(function () {
+            // 发送ajax发送请求
+            let url = "${pageContext.request.contextPath}/CategoryServlet";
+            let data = "action=ajaxFindAll";
+            $.get(url,data,function (response) {
+                for (let c of response){
+                    $('#categoryUI').append('<li><a href="route_list.jsp">'+c.cname+'</a></li>');
+                }
+            });
+        });
+    </script>
 </div>
 <!-- 登录模态框 -->
 <div class="modal fade" id="loginModel" tabindex="-1" role="dialog" aria-labelledby="loginModelLable">
