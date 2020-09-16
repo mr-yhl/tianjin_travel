@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--引入约束文件,DTD约束头-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--根标签  命名空间,与下面语句的id一起组成查询的标识-->
+<mapper namespace="com.itheima.travel.dao.RouteDao">
+
+    <select id="findCount" resultType="java.lang.Integer">
+        select count(*) from tab_route
+        <where>
+            <if test="cid!=null">
+                and cid = #{cid}
+            </if>
+            <if test="rname !=null and rname !=''">
+                and rname like concat(concat('%',#{rname}),'%')
+            </if>
+
+        </where>
+    </select>
+    <select id="findList" resultType="com.itheima.travel.domain.Route">
+        select * from tab_route
+        <where>
+            <if test="cid!=null">
+                and cid = #{cid}
+            </if>
+            <if test="rname !=null and rname !=''">
+                and rname like concat(concat('%',#{rname}),'%')
+            </if>
+
+        </where>
+        limit #{index},#{pageSize}
+    </select>
+    <resultMap id="routeBaseMap" type="com.itheima.travel.domain.Route">
+        <!--route单表手动封装-->
+        <id column="rid" property="rid"></id>
+        <result column="rname" property="rname"></result>
+        <result column="price" property="price"></result>
+        <result column="routeIntroduce" property="routeIntroduce"></result>
+        <result column="rflag" property="rflag"></result>
+        <result column="rdate" property="rdate"></result>
+        <result column="isThemeTour" property="isThemeTour"></result>
+        <result column="num" property="num"></result>
+        <result column="cid" property="cid"></result>
+        <result column="rimage" property="rimage"></result>
+        <result column="sid" property="sid"></result>
+        <result column="sourceId" property="sourceId"></result>
+        <!--多对一嵌套：分类-->
+        <association property="category" column="cid"
+                     select="com.itheima.travel.dao.CategoryDao.findByCid"></association>
+        <!--多对一嵌套：商家-->
+        <association property="seller" column="sid" select="com.itheima.travel.dao.SellerDao.findBySid"></association>
+        <!--一对多嵌套：图册列表-->
+        <collection property="routeImgList" column="rid"
+                    select="com.itheima.travel.dao.RouteImgDao.findByRid"></collection>
+    </resultMap>
+
+    <select id="findDetail" resultMap="routeBaseMap">
+    select * from tab_route where rid = #{rid}
+</select>
+</mapper>

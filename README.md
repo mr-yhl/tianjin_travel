@@ -213,7 +213,26 @@ public User findByUsername(String username) {
 2. 向服务器发请求ajax  ajaxFIndAll  
 3. 将返回结果遍历,展示分析
 
+> 页面导航栏内容存在mysql的数据库中,第一次访问的时候先从数据库中获取到内容,保存在缓存数据库redis中.之后的每一次调用都是在redis中查询.
+
+
 ### 2.Redis介绍与使用
+**简介**
+> Redis（Remote Dictionary Server）是用C语言开发的一个开源的高性能键值对数据库。它的所有数据都是保存在<span style="color:red">内存中</span>的,这也就决定了其读写速度之快,是其它硬盘保存数据的系统所无法匹敌的。
+
+> 官方曾经给出过一组测试数据，50个并发执行100000个请求: 读的速度是110000次/s,写的速度是81000次/s
+
+**数据结构**
+
+Redis采用的是键值对存储，键的类型只能为字符串，值支持五种数据类型：
+  
+  > * 字符串：String
+  > * 哈希：HashMap
+  > * 双向链表：LinkedList
+  > * 无序集合：HashSet
+  > * 有序集合：LinkedHashSet
+
+
 
 
 #### 2.1 导航栏内容redis加载
@@ -221,6 +240,78 @@ public User findByUsername(String username) {
 
 #### 缓存一致性问题
 > 解决方案，我们对缓存相关进行增删改时，清空缓存，不要直接去修改数据库，通过java语言来实现功能（修改完毕后，可以通过jedis删除缓存数据），解决了缓存一致性的问题
+
+## 第五天 列表分页显示,查询功能,购物车功能是实现.
+### 列表分页需求分析
+![需求分析](./readimg/day05.1.png)
+
+> 前台页面
+
+[线路列表](./src/main/webapp/route_list.jsp)
+
+> servlet
+
+[servlet](./src/main/java/com/itheima/travel/web/servlet/RouteServlet.java)
+
+> service
+
+[service实现类](./src/main/java/com/itheima/travel/service/impl/RouteServiceImpl.java)
+
+> Dao + xml
+
+[dao](./src/main/java/com/itheima/travel/dao/RouteDao.java)  | [xml](src/main/resources/com/itheima/travel/dao/RouteDao.xml)
+
+### 查询需求分析
+
+![需求分析](./readimg/day05.1.2.png)
+
+### 详情展示
+
+**多表查询**
+
+> 1. 关联查询（inner join），底层会产生笛卡尔积，三张表以上不建议使用
+> 2. 嵌套查询，底层不会产生笛卡尔积，但是操作步骤繁琐，开发使用不多【本次使用】
+> 3. 单表查询，java组合，互联网项目使用最多方案
+
+> servlet
+
+[servlet](./src/main/java/com/itheima/travel/web/servlet/RouteServlet.java)
+
+> service
+
+[service](./src/main/java/com/itheima/travel/service/RouteService.java)
+
+> routedao
+
+[dao](./src/main/java/com/itheima/travel/dao/RouteDao.java)  |  [xml](./src/main/resources/com/itheima/travel/dao/RouteDao.xml)
+
+> 前台页面
+
+[页面](./src/main/webapp/route_detail.jsp)
+
+### 购物车功能,添加购物车,查看购物车,删除购物项
+
+> 购物车相关内容
+
+> 实体类
+ 
+ [CartItem](./src/main/java/com/itheima/travel/domain/CartItem.java)  |  [cart](./src/main/java/com/itheima/travel/domain/Cart.java)
+ 
+> 工具类
+
+[CartUtils](./src/main/java/com/itheima/travel/util/CartUtils.java)
+
+> servlet
+
+[CartServlet](./src/main/java/com/itheima/travel/web/servlet/CartServlet.java)
+
+> service
+
+[RouteService](./src/main/java/com/itheima/travel/service/RouteService.java) | [实现类](./src/main/java/com/itheima/travel/service/impl/RouteServiceImpl.java)
+
+ 
+
+
 
 
 

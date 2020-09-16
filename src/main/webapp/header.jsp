@@ -27,7 +27,7 @@
             <div class="login">
                 <span>欢迎回来，${currentUser.username}</span>
                 <a href="home_index.jsp" class="collection">个人中心</a>
-                <a href="cart.jsp" class="collection">购物车</a>
+                <a href="${pageContext.request.contextPath}/CartServlet?action=showCart" class="collection">购物车</a>
                 <a href="${pageContext.request.contextPath}/UserServlet?action=logout">退出</a>
             </div>
         </c:if>
@@ -42,6 +42,14 @@
                 <input id="rname" name="rname" type="text" placeholder="请输入路线名称" class="search_input" value="${rname}"
                        autocomplete="off">
                 <a href="javascript:void(0);" onclick="searchClick()" class="search-button">搜索</a>
+                <script>
+                    function searchClick() {
+                        // 获取页面参数
+                        let rname = $("#rname").val();
+                        // 跳转并调用servlet的方法
+                        location.href='${pageContext.request.contextPath}/RouteServlet?action=findByPage&pageNum=1&pageSize=8&rname='+rname;
+                    }
+                </script>
             </div>
             <div class="hottel">
                 <div class="hot_pic">
@@ -70,7 +78,8 @@
             let data = "action=ajaxFindAll";
             $.get(url,data,function (response) {
                 for (let c of response){
-                    $('#categoryUI').append('<li><a href="route_list.jsp">'+c.cname+'</a></li>');
+                    /*\${c.cid}忽略el表达式,在变量中取值*/
+                    $('#categoryUI').append(`<li><a href="${pageContext.request.contextPath}/RouteServlet?action=findByPage&cid=\${c.cid}&pageNum=1&pageSize=8">\${c.cname}</a></li>`);
                 }
             });
         });
