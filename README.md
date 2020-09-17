@@ -309,7 +309,67 @@ Redis采用的是键值对存储，键的类型只能为字符串，值支持五
 
 [RouteService](./src/main/java/com/itheima/travel/service/RouteService.java) | [实现类](./src/main/java/com/itheima/travel/service/impl/RouteServiceImpl.java)
 
- 
+## 生成订单
+
+创建OrderServlet
+
+在session获取user对象
+查询收货地址
+从redis中获取购物车对象
+将数据写入到request
+转发到视图
+```java
+protected void orderInfo(HttpServletRequest requsest, HttpServletResponse response) throws ServletException, IOException {
+    // 获取session中的用户对象
+    User currentUser = (User) requsest.getSession().getAttribute("currentUser");
+    // 查询收货地址
+    List<Address> addressList = addressService.findByUid(String.valueOf(currentUser.getUid()));
+    // 从redis中获取购物车
+    Cart cart = CartUtils.redis2Cart(currentUser.getUid());
+    // 将数据写入到request中
+    requsest.setAttribute("addressList",addressList);
+    requsest.setAttribute("cart",cart);
+    // 转发视图
+    requsest.getRequestDispatcher("/order_info.jsp").forward(requsest,response);
+
+}
+```
+
+
+设置过滤器
+```java
+@WebFilter(urlPatterns = {"/home_index.jsp","/home_left.jsp","/AddressServlet","/CartServlet","/OrderServlet"})
+
+```
+
+
+
+修改前台显示order_info.jsp
+
+```jsp
+<c:forEach items="${cart.cartItemMap}" var="entry">
+    <ul class="yui3-g">
+        <li class="yui3-u-1-6">
+            <span><img src="${pageContext.request.contextPath}/${entry.value.route.rimage}"/></span>
+        </li>
+        <li class="yui3-u-7-12">
+            <div class="desc">${entry.value.route.rname}</div>
+            <div class="seven">7天无理由退货</div>
+        </li>
+        <li class="yui3-u-1-12">
+            <div class="price">￥${entry.value.route.price}</div>
+        </li>
+        <li class="yui3-u-1-12">
+            <div class="num">X${entry.value.num}</div>
+        </li>
+        <li class="yui3-u-1-12">
+            <div class="exit">有货</div>
+        </li>
+    </ul>
+</c:forEach>
+
+
+```
 
 
 

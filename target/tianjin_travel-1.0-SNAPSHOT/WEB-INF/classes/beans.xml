@@ -3,4 +3,5 @@
     <bean id="addressService" class="com.itheima.travel.service.impl.AddressServiceImpl"></bean>
     <bean id="categoryService" class="com.itheima.travel.service.impl.CategoryServiceImpl"></bean>
     <bean id="routeService" class="com.itheima.travel.service.impl.RouteServiceImpl"></bean>
+    <bean id="orderService" class="com.itheima.travel.service.impl.OrderServiceImpl"></bean>
 </beans>

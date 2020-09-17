@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/home_index.jsp","/home_left.jsp","/AddressServlet","/CartServlet"})
+@WebFilter(urlPatterns = {"/home_index.jsp","/home_left.jsp","/AddressServlet","/CartServlet","/OrderServlet"})
 public class UserFilter implements Filter {
     /**
      *
