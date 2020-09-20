@@ -6,13 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ff8ec14-d116-476a-b90c-b680af2d7fd2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/itheima/travel/util/BeanFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/util/BeanFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/itheima/travel/util/BeanFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/itheima/travel/util/BeanFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/WEB-INF/classes/com/itheima/travel/util/BeanFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/WEB-INF/classes/com/itheima/travel/util/BeanFactory.class" afterDir="false" />
-    </list>
+    <list default="true" id="9ff8ec14-d116-476a-b90c-b680af2d7fd2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +73,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
@@ -228,6 +222,7 @@
       <workItem from="1600591305755" duration="1945000" />
       <workItem from="1600593321314" duration="71000" />
       <workItem from="1600593466335" duration="24000" />
+      <workItem from="1600593549497" duration="190000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1599902555374</created>
@@ -347,10 +342,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1106" height="237" key="GridCell.Tab.3.right/0.0.1536.864@0.0.1536.864" timestamp="1600343999707" />
-    <state x="427" y="13" key="SettingsEditor" timestamp="1600593388688">
+    <state x="427" y="13" key="SettingsEditor" timestamp="1600593810914">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="427" y="13" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1600593388688" />
+    <state x="427" y="13" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1600593810914" />
     <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1599903188864">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
