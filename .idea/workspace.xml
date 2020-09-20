@@ -7,32 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ff8ec14-d116-476a-b90c-b680af2d7fd2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/dao/OrderDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/dao/OrderItemdao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/service/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/util/PayUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/web/servlet/OrderServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/web/servlet/PayNotifyServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/web/servlet/PayServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/itheima/travel/dao/OrderDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/itheima/travel/dao/OrderItemDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testjs/qr-demo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/itheima/travel/web/filter/UserFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/web/filter/UserFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/beans.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/beans.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/order_info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/order_info.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pay.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/beans.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/beans.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/itheima/travel/web/filter/UserFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/itheima/travel/web/filter/UserFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/itheima/travel/util/BeanFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/itheima/travel/util/BeanFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/itheima/travel/util/BeanFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/itheima/travel/util/BeanFactory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/WEB-INF/classes/beans.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/WEB-INF/classes/beans.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/WEB-INF/classes/com/itheima/travel/web/filter/UserFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/WEB-INF/classes/com/itheima/travel/web/filter/UserFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/order_info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/order_info.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/pay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/pay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/WEB-INF/classes/com/itheima/travel/util/BeanFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tianjin_travel-1.0-SNAPSHOT/WEB-INF/classes/com/itheima/travel/util/BeanFactory.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +79,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
@@ -207,11 +186,6 @@
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
             </expand>
             <select />
           </treeState>
@@ -250,6 +224,10 @@
       <workItem from="1600263625648" duration="893000" />
       <workItem from="1600301992493" duration="1111000" />
       <workItem from="1600312496312" duration="14262000" />
+      <workItem from="1600569948207" duration="773000" />
+      <workItem from="1600591305755" duration="1945000" />
+      <workItem from="1600593321314" duration="71000" />
+      <workItem from="1600593466335" duration="24000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1599902555374</created>
@@ -293,10 +271,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="844" y="234" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1600330894492" />
-    <state x="766" y="167" key="#com.intellij.ide.util.MemberChooser" timestamp="1600335241559">
+    <state x="766" y="167" key="#com.intellij.ide.util.MemberChooser" timestamp="1600591629456">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="766" y="167" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1600335241559" />
+    <state x="766" y="167" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1600591629456" />
     <state x="686" y="140" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1599723126822">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -305,22 +283,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="0" y="56" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1599902951379" />
-    <state width="1107" height="290" key="GridCell.Tab.0.bottom" timestamp="1600343999713">
+    <state width="1105" height="290" key="GridCell.Tab.0.bottom" timestamp="1600593285739">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1107" height="290" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1600343999713" />
-    <state width="1107" height="290" key="GridCell.Tab.0.center" timestamp="1600343999713">
+    <state width="1105" height="290" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1600593285739" />
+    <state width="1105" height="290" key="GridCell.Tab.0.center" timestamp="1600593285739">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1107" height="290" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1600343999713" />
-    <state width="1107" height="290" key="GridCell.Tab.0.left" timestamp="1600343999713">
+    <state width="1105" height="290" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1600593285739" />
+    <state width="1105" height="290" key="GridCell.Tab.0.left" timestamp="1600593285739">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1107" height="290" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1600343999713" />
-    <state width="1107" height="290" key="GridCell.Tab.0.right" timestamp="1600343999713">
+    <state width="1105" height="290" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1600593285739" />
+    <state width="1105" height="290" key="GridCell.Tab.0.right" timestamp="1600593285739">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1107" height="290" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1600343999713" />
+    <state width="1105" height="290" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1600593285739" />
     <state width="1106" height="237" key="GridCell.Tab.1.bottom" timestamp="1600343999707">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -369,10 +347,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1106" height="237" key="GridCell.Tab.3.right/0.0.1536.864@0.0.1536.864" timestamp="1600343999707" />
-    <state x="427" y="13" key="SettingsEditor" timestamp="1600332530547">
+    <state x="427" y="13" key="SettingsEditor" timestamp="1600593388688">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="427" y="13" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1600332530547" />
+    <state x="427" y="13" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1600593388688" />
     <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1599903188864">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

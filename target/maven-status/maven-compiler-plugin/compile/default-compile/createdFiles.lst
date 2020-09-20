@@ -14,6 +14,7 @@ com\itheima\travel\web\filter\UserFilter.class
 com\itheima\travel\web\servlet\RouteServlet.class
 com\itheima\travel\dao\AddressDao.class
 com\itheima\travel\service\impl\UserServiceImpl.class
+com\itheima\travel\util\BeanFactory$1.class
 com\itheima\travel\service\UserService.class
 com\itheima\travel\dao\SellerDao.class
 com\itheima\travel\domain\Category.class
